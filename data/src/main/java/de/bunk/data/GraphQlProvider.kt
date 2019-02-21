@@ -1,13 +1,14 @@
-package de.bunk.view
+package de.bunk.data
 
 import com.apollographql.apollo.ApolloClient
 import okhttp3.OkHttpClient
 
-object GraphQlProvider {
-    fun provideApolloClient(): ApolloClient =
-        createApolloClient(createGraphQlOkHttpClient(), "https://api.github.com/graphql")
+private const val BASE_URL: String = "https://api.github.com/graphql"
 
-    private fun createGraphQlOkHttpClient(): OkHttpClient {
+object GraphQlProvider {
+    fun provideApolloClient(apiKey: ApiKey): ApolloClient = createApolloClient(apiKey)
+
+    private fun createGraphQlOkHttpClient(apiKey: ApiKey): OkHttpClient {
         return OkHttpClient
             .Builder()
             .addInterceptor { chain ->
@@ -18,17 +19,17 @@ object GraphQlProvider {
                 )
                 builder.addHeader(
                     "Authorization",
-                    "Bearer " + "4461fa5ea6e8823ee7a328c84d38b641156955fb"
+                    "Bearer ${apiKey.value}"
                 )
                 chain.proceed(builder.build())
             }
             .build()
     }
 
-    private fun createApolloClient(okHttpClient: OkHttpClient, baseUrl: String): ApolloClient {
+    private fun createApolloClient(apiKey: ApiKey): ApolloClient {
         return ApolloClient.builder()
-            .serverUrl(baseUrl)
-            .okHttpClient(okHttpClient)
+            .serverUrl(BASE_URL)
+            .okHttpClient(createGraphQlOkHttpClient(apiKey))
             .build()
     }
 }

@@ -8,15 +8,15 @@ import com.apollographql.apollo.rx2.Rx2Apollo
 import de.bunk.common.SubscribeOnScheduler
 import de.bunk.domain.GitHubDataSource
 import de.bunk.domain.Repository
-import de.bunk.view.GraphQlProvider
 import io.reactivex.Observable
 import io.reactivex.Single
 
 class GitHubDataSourceImpl(
-    private val subscribeOnScheduler: SubscribeOnScheduler
+    private val subscribeOnScheduler: SubscribeOnScheduler,
+    apiKey: ApiKey
 ) : GitHubDataSource {
 
-    private val apolloClient: ApolloClient = GraphQlProvider.provideApolloClient()
+    private val apolloClient: ApolloClient = GraphQlProvider.provideApolloClient(apiKey)
 
     override fun getRepositories(): Single<List<Repository>> {
         val query = SearchMostStarQuery.builder()
