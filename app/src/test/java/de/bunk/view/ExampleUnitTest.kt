@@ -1,4 +1,4 @@
-package de.bunk.github_graphql_android
+package de.bunk.view
 
 import org.junit.Test
 

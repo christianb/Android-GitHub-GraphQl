@@ -1,4 +1,4 @@
-package de.bunk.github_graphql_android
+package de.bunk.view
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

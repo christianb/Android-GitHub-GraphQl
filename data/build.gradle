@@ -1,0 +1,15 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+apply plugin: 'com.apollographql.android'
+
+dependencies {
+    compile project(path: ':common')
+    compile project(path: ':domain')
+
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // GraphQL
+    implementation "com.apollographql.apollo:apollo-runtime:$graphql_version"
+    implementation "com.apollographql.apollo:apollo-android-support:$graphql_version"
+    implementation "com.apollographql.apollo:apollo-rx2-support:$graphql_version"
+}
