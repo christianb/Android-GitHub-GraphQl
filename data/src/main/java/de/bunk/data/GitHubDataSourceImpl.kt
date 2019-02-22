@@ -51,7 +51,8 @@ class GitHubDataSourceImpl(
                             owner,
                             null,
                             primaryLanguage,
-                            starCount
+                            starCount,
+                            null
                         )
 
                         list.add(PagedRepository(repository, cursor))
@@ -84,7 +85,8 @@ class GitHubDataSourceImpl(
                         owner,
                         repository.description(),
                         repository.primaryLanguage()?.name(),
-                        repository.stargazers().totalCount()
+                        repository.stargazers().totalCount(),
+                        repository.owner().avatarUrl().toString()
                     )
                 } else {
                     Repository.unknownRepository()

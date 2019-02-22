@@ -33,5 +33,8 @@ query GetRepositoryDetail($owner: String!, $name:String!) {
     stargazers {
       totalCount
     }
+    owner {
+        avatarUrl
+    }
   }
 }

@@ -2,4 +2,5 @@
     <string name="app_name">GitHub-GraphQl-Android</string>
     <string name="language">Language: %1$s</string>
     <string name="stars">Stars: %1$d</string>
+    <string name="avatar_image">avatar image</string>
 </resources>

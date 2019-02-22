@@ -19,13 +19,11 @@ class RepositoryListActivity : AppCompatActivity() {
         repositoryItemClickListener = object : RepositoryItemClickListener {
             override fun onItemClicked(pagedRepository: PagedRepository) {
                 val context = this@RepositoryListActivity
-                context.startActivity(
-                    RepositoryDetailActivity.intent(
-                        context,
-                        pagedRepository.repository.owner,
-                        pagedRepository.repository.name
-                    )
-                )
+                val intent = with(pagedRepository.repository) {
+                    RepositoryDetailActivity.createIntent(context, owner, name)
+                }
+
+                context.startActivity(intent)
             }
         }
     }
@@ -37,7 +35,6 @@ class RepositoryListActivity : AppCompatActivity() {
         with(recyclerView) {
             adapter = repositoryAdapter
             layoutManager = LinearLayoutManager(this@RepositoryListActivity)
-//            addItemDecoration(VerticalSpaceItemDecoration(VERTICAL_SPACE_HEIGHT))
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
 //            addOnScrollListener(paginationScrollListener)
         }

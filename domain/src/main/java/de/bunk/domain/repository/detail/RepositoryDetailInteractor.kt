@@ -5,7 +5,5 @@ import de.bunk.domain.GitHubDataSource
 class RepositoryDetailInteractor(
     private val gitHubDataSource: GitHubDataSource
 ) {
-    fun getRepositoryDetail() {
-        // todo implement me
-    }
+    fun getRepositoryDetail(owner: String, repoName: String) = gitHubDataSource.getRepository(owner, repoName)
 }

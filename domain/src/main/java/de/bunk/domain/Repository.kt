@@ -6,7 +6,8 @@ data class Repository(
     val owner: String,
     val description: String?,
     val primaryLanguage: String?,
-    val starCount: Int
+    val starCount: Int,
+    val avatarUrl: String?
 ) {
     companion object {
         fun unknownRepository() = Repository(
@@ -15,7 +16,8 @@ data class Repository(
             "unknown owner",
             null,
             null,
-            -1
+            -1,
+            null
         )
     }
 }
