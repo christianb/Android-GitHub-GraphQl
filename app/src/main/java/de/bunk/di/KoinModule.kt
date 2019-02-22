@@ -6,7 +6,7 @@ import de.bunk.common.SubscribeOnSchedulerImpl
 import de.bunk.data.GitHubDataSourceImpl
 import de.bunk.data.ApiKey
 import de.bunk.domain.GitHubDataSource
-import de.bunk.domain.GitHubInteractor
+import de.bunk.domain.repository.list.RepositoryListInteractor
 import de.bunk.util.ObserveOnSchedulerImpl
 import de.bunk.view.BuildConfig
 import de.bunk.view.list.RepositoryListViewModel
@@ -17,7 +17,7 @@ val module = org.koin.dsl.module.module {
   viewModel { RepositoryListViewModel(get(), get()) }
 
   single<GitHubDataSource> { GitHubDataSourceImpl(get(), get()) }
-  factory<GitHubInteractor> { GitHubInteractor(get()) }
+  factory<RepositoryListInteractor> { RepositoryListInteractor(get()) }
 
   factory<ObserveOnScheduler> { ObserveOnSchedulerImpl() }
   factory<SubscribeOnScheduler> { SubscribeOnSchedulerImpl() }

@@ -7,18 +7,31 @@ query SearchMostStar($queryString: String!) {
         ... on Repository {
           id
           name
+          owner {
+            login
+          }
           primaryLanguage {
             name
           }
-          description
           stargazers {
-            totalCount
-          }
-          forks {
             totalCount
           }
         }
       }
+    }
+  }
+}
+
+query GetRepositoryDetail($owner: String!, $name:String!) {
+  repository(owner: $owner, name: $name) {
+    id
+    name
+    description
+    primaryLanguage {
+      name
+    }
+    stargazers {
+      totalCount
     }
   }
 }

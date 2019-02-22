@@ -5,30 +5,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.bunk.common.ObserveOnScheduler
-import de.bunk.domain.GitHubInteractor
+import de.bunk.domain.repository.list.RepositoryListInteractor
 import de.bunk.domain.Repository
+import de.bunk.domain.repository.PagedRepository
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 
 private val TAG = RepositoryListViewModel::class.java.simpleName
 
 class RepositoryListViewModel(
-    private val gitHubInteractor: GitHubInteractor,
+    private val repositoryListInteractor: RepositoryListInteractor,
     private val observeOnScheduler: ObserveOnScheduler
 ) : ViewModel() {
 
-    private val liveData = MutableLiveData<List<Repository>>()
-    fun liveData(): LiveData<List<Repository>> = liveData
+    private val liveData = MutableLiveData<List<PagedRepository>>()
+    fun liveData(): LiveData<List<PagedRepository>> = liveData
 
     private var disposable: Disposable? = null
 
     fun fetchRepositories() {
-        disposable = gitHubInteractor.getRepositoryList()
+        disposable = repositoryListInteractor.getRepositoryList()
             .observeOn(observeOnScheduler.mainThreadScheduler)
             .subscribeBy(
                 onSuccess = {
                     val list = liveData.value ?: emptyList()
-                    val mutableList = mutableListOf<Repository>()
+                    val mutableList = mutableListOf<PagedRepository>()
 
                     mutableList.addAll(list)
                     mutableList.addAll(it)
